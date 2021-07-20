@@ -18,7 +18,8 @@
         "php": "^8.0",
         "backpack/crud": "4.1.*",
         "illuminate/support": "~8",
-        "lab404/laravel-impersonate": "^1.7"
+        "lab404/laravel-impersonate": "^1.7",
+        "spatie/laravel-package-tools": "^1.9"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
