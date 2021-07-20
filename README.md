@@ -5,24 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/pentangle/laravel-backpack-impersonation-addon/Check%20&%20fix%20styling?label=code%20style)](https://github.com/pentangle/laravel-backpack-impersonation-addon/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/pentangle/laravel-backpack-impersonation-addon.svg?style=flat-square)](https://packagist.org/packages/pentangle/laravel-backpack-impersonation-addon)
 
----
-This package can be used as to scaffold a framework agnostic package. Follow these steps to get started:
 
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this laravel-backpack-impersonation-addon
-2. Run "./configure.sh" to run a script that will replace all placeholders throughout all the files
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-backpack-impersonation-addon.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-backpack-impersonation-addon)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
@@ -32,35 +15,118 @@ You can install the package via composer:
 composer require pentangle/laravel-backpack-impersonation-addon
 ```
 
-## Usage
+## Setup
 
-```php
-$laravel-backpack-impersonation-addon = new Pentangle\LaravelBackpackImpersonationAddon();
-echo $laravel-backpack-impersonation-addon->echoPhrase('Hello, Pentangle!');
-```
+add the trait to the desired user model
 
-## Testing
+````
+use UserImpersanationTrait;
+````
 
-```bash
-composer test
-```
+override the existing functions by adding them to the model
 
-## Changelog
+````
+    /**
+     * @return bool
+     */
+    public function canImpersonate()
+    {
+        return true;
+    }
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+    /**
+     * @return bool
+     */
+    public function canBeImpersonated()
+    {
+        return true;
+    }
 
-## Contributing
+    public function impersonateButton($crud = false)
+    {
+        return '<a href="'.route("impersonate", $this->id).'">Impersonate this user</a>';
+    }
+````
 
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+add the following code to the ModelCrudController
 
-## Security Vulnerabilities
+````
+$this->crud->addButton('line', 'impersonateButton', 'model_function', 'impersonateButton');
+````
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+Publish the config file to configure custom routes
+````
+php artisan vendor:publish --tag=impersonate
+````
+
+
+config/laravel-impersonate.php
+
+````
+
+    /**
+     * The session key used to store the original user id.
+     */
+    'session_key' => 'impersonated_by',
+
+    /**
+     * The session key used to stored the original user guard.
+     */
+    'session_guard' => 'impersonator_guard',
+
+    /**
+     * The session key used to stored what guard is impersonator using.
+     */
+    'session_guard_using' => 'impersonator_guard_using',
+
+    /**
+     * The default impersonator guard used.
+     */
+    'default_impersonator_guard' => 'web',
+
+    /**
+     * The URI to redirect after taking an impersonation.
+     *
+     * Only used in the built-in controller.
+     * * Use 'back' to redirect to the previous page
+     */
+    'take_redirect_to' => '/',
+
+    /**
+     * The URI to redirect after leaving an impersonation.
+     *
+     * Only used in the built-in controller.
+     * Use 'back' to redirect to the previous page
+     */
+    'leave_redirect_to' => '/',
+````
+
+[comment]: <> (## Testing)
+
+[comment]: <> (```bash)
+
+[comment]: <> (composer test)
+
+[comment]: <> (```)
+
+[comment]: <> (## Changelog)
+
+[comment]: <> (Please see [CHANGELOG]&#40;CHANGELOG.md&#41; for more information on what has changed recently.)
+
+[comment]: <> (## Contributing)
+
+[comment]: <> (Please see [CONTRIBUTING]&#40;.github/CONTRIBUTING.md&#41; for details.)
+
+[comment]: <> (## Security Vulnerabilities)
+
+[comment]: <> (Please review [our security policy]&#40;../../security/policy&#41; on how to report security vulnerabilities.)
 
 ## Credits
 
 - [Séan Poynter-Smith](https://github.com/Pentangle)
-- [All Contributors](../../contributors)
+
+[comment]: <> (- [Spatie]&#40;../../contributors&#41;)
+[comment]: <> (- [404]&#40;../../contributors&#41;)
 
 ## License
 
