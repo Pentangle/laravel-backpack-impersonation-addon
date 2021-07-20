@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pentangle\LaravelBackpackImpersonationAddon\Traits;
-
 
 use Lab404\Impersonate\Models\Impersonate;
 
