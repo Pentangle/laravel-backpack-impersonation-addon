@@ -1,16 +1,16 @@
 {
-    "name": "vendor_slug/package_slug",
-    "description": ":package_description",
+    "name": "pentangle/laravel-backpack-impersonation-addon",
+    "description": "Backpack for Laravel Addon allows backpack users to impersonate other users",
     "keywords": [
-        ":vendor_name",
-        "package_slug"
+        "Pentangle",
+        "laravel-backpack-impersonation-addon"
     ],
-    "homepage": "https://github.com/vendor_slug/package_slug",
+    "homepage": "https://github.com/pentangle/laravel-backpack-impersonation-addon",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Séan Poynter-Smith",
+            "email": "spoyntersmith@users.noreply.github.com",
             "role": "Developer"
         }
     ],
@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src"
+            "Pentangle\\LaravelBackpackImpersonationAddon\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Pentangle\\LaravelBackpackImpersonationAddon\\Tests\\": "tests"
         }
     },
     "scripts": {

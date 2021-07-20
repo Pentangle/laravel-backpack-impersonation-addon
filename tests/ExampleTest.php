@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Pentangle\LaravelBackpackImpersonationAddon\Tests;
 
 use PHPUnit\Framework\TestCase;
 
