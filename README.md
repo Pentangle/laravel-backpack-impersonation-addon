@@ -20,7 +20,7 @@ composer require pentangle/laravel-backpack-impersonation-addon
 add the trait to the desired user model
 
 ````
-use UserImpersanationTrait;
+use UserImpersonationTrait;
 ````
 
 override the existing functions by adding them to the model
