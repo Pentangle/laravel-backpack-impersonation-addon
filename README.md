@@ -47,6 +47,11 @@ override the existing functions by adding them to the model
         return '<a href="'.route("impersonate", $this->id).'">Impersonate this user</a>';
     }
 ````
+add the following code to your routes file web.php
+
+````
+Route::impersonate();
+````
 
 add the following code to the ModelCrudController
 
